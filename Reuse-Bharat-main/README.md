@@ -1,33 +1,25 @@
 # Reuse Bharat
 
-> India's sustainable campus marketplace — connecting students to buy, sell, and share resources within their college community.
+> A unified platform to address resource wastage in India through real-time coordination and transparent systems.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 [![Platform: Celo](https://img.shields.io/badge/Platform-Celo-brightgreen.svg)](https://celo.org)
-[![Stack: MERN](https://img.shields.io/badge/Stack-MERN%2BWeb3-purple.svg)](https://celo.org)
+[![Stack: MERN+Web3](https://img.shields.io/badge/Stack-MERN%2BWeb3-purple.svg)](https://celo.org)
 
-A full-stack Web3 platform enabling college students to trade textbooks, lab manuals, stationery, food, and medicines — reducing waste and saving costs across campuses in India.
+## The Vision
 
-## Why Reuse Bharat?
+India faces a critical resource wastage crisis:
+- **78–80 million tonnes** of food wasted annually
+- **484 tonnes** of biomedical waste generated daily
+- **194 million** people remain undernourished
+- **40+ million** college students with unused educational materials
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                           THE PROBLEM                                   │
-├────────────────────────────────────────────────────────────────────────┤
-│  💔 40%      of cooked college mess food is thrown daily              │
-│  💔 ₹18,000 Cr of sealed medicine expires unused in Indian homes    │
-│  💔 1 Student buys. 1 year later, it's landfill.                   │
-│       Textbooks, lab coats, calculators — forgotten in corners.      │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-### Our Solutions
-
-| App | Description | Category |
-|-----|-------------|----------|
-| **Campus Samagri** | Buy/sell textbooks, lab manuals, notes | Academic |
-| **Annapurna** | Surplus mess food connecting to those in need | Food Rescue |
-| **AushadhMitra** | Share unopened medicines before expiry | Healthcare |
+**Reuse Bharat** connects surplus food, study materials, and near-expiry medicines to those in need through:
+- Real-time coordination
+- Verified networks
+- Transparent system powered by Web2 + Web3 technologies
+- Wallet-based identity
+- On-chain data storage using Celo blockchain
 
 ## Architecture
 
@@ -37,9 +29,17 @@ A full-stack Web3 platform enabling college students to trade textbooks, lab man
 ├─────────────────────────────────────────────────────────────────────┤
 │  ┌─────────────┐   ┌─────────────┐   ┌─────────────────────────────┐  │
 │  │   Frontend  │◄──│   Backend   │◄──│    Celo Blockchain         │  │
-│  │  (React)    │   │ (Express)  │   │ (CampusMarketplace.sol)      │  │
-│  │             │   │  MongoDB   │   │  Data Storage Only         │  │
+│  │  (React)    │   │ (Express)  │   │ (On-chain Data Storage)     │  │
+│  │             │   │  MongoDB   │   │                             │  │
 │  └─────────────┘   └─────────────┘   └─────────────────────────────┘  │
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────────────┐   │
+│  │              Features Module                                 │   │
+│  │  ┌─────────────┐ ┌─────────────┐ ┌───────────────────────┐ │   │
+│  │  │CampusSamagri│ │ Annapurna   │ │   AushadhMitra        │ │   │
+│  │  │ (Academic)  │ │ (Food)      │ │   (Healthcare)       │ │   │
+│  │  └─────────────┘ └─────────────┘ └───────────────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -49,9 +49,32 @@ A full-stack Web3 platform enabling college students to trade textbooks, lab man
 |-------|------------|
 | **Frontend** | React 18, Vite, React Router, Framer Motion |
 | **Backend** | Express.js, MongoDB (Mongoose), Multer, Cloudinary |
-| **Database** | MongoDB |
 | **Blockchain** | Solidity, Hardhat, Celo Sepolia |
-| **Storage** | Cloudinary (images) |
+| **Storage** | Cloudinary (images), Celo (on-chain data) |
+
+## Features
+
+| Module | Description | Impact |
+|--------|-------------|--------|
+| **Campus Samagri** | Buy/sell textbooks, lab materials, stationery | Reduce educational waste |
+| **Annapurna** | Connect surplus food to those in need | Combat food wastage |
+| **AushadhMitra** | Share near-expiry medicines | Improve healthcare access |
+
+### Campus Samagri
+- List textbooks, lab manuals, stationery
+- Browse by category and condition
+- Filter by price range
+- Wallet-based transactions
+
+### Annapurna
+- Real-time surplus food listing
+- Verified donor/recipient network
+- QR-based pickup verification
+
+### AushadhMitra
+- Medicine sharing before expiry
+- Batch and expiry tracking
+- Verified medicine sources
 
 ## Project Structure
 
@@ -59,18 +82,18 @@ A full-stack Web3 platform enabling college students to trade textbooks, lab man
 reuse-bharat/
 ├── frontend/                 # React + Vite application
 │   ├── src/
-│   │   ├── components/      # Reusable UI components
+│   │   ├── components/      # UI components
 │   │   │   ├── hero/
 │   │   │   ├── layout/
 │   │   │   └── sections/
 │   │   ├── pages/           # Page components
-│   │   │   ├── Landing.jsx         # Landing page
-│   │   │   ├── CampusSamagri.jsx   # Marketplace
+│   │   │   ├── Landing.jsx
+│   │   │   ├── CampusSamagri.jsx   # Academic marketplace
 │   │   │   ├── Annapurna.jsx       # Food rescue
 │   │   │   ├── AushadhMitra.jsx    # Medicine sharing
 │   │   │   ├── Dashboard.jsx
 │   │   │   └── Auth.jsx
-│   │   ├── lib/            # Utilities
+│   │   ├── lib/
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── index.html
@@ -79,11 +102,11 @@ reuse-bharat/
 │
 ├── backend/                 # Express API
 │   ├── src/
-│   │   ├── config/         # Database & cloud config
-│   │   ├── controllers/   # Route logic
-│   │   ├── models/        # Mongoose schemas
-│   │   ├── routes/        # API routes
-│   │   ├── middleware/    # Upload middleware
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── middleware/
 │   │   └── utils/
 │   ├── app.js
 │   ├── index.js
@@ -96,8 +119,8 @@ reuse-bharat/
 ├── scripts/                # Deployment scripts
 │   └── deploy.js
 │
-├── hardhat.config.js       # Hardhat configuration
-├── package.json           # Root package.json
+├── hardhat.config.js
+├── package.json
 └── README.md
 ```
 
@@ -107,24 +130,21 @@ reuse-bharat/
 
 - Node.js 18+
 - MongoDB (local or Atlas)
-- npm or yarn
 - Celo Wallet (for blockchain features)
 
 ### Installation
 
 ```bash
-# Clone and navigate
+# Clone
 cd reuse-bharat
 
-# Install all dependencies
+# Install dependencies
 npm install
 cd frontend && npm install && cd ..
 cd backend && npm install && cd ..
 ```
 
 ### Environment Variables
-
-Create `.env` files:
 
 **backend/.env**
 ```env
@@ -140,14 +160,14 @@ CLOUDINARY_API_SECRET=your_api_secret
 PRIVATE_KEY=your_celo_wallet_private_key
 ```
 
-### Running the Application
+### Running
 
 ```bash
-# Terminal 1: Start Backend
+# Terminal 1: Backend
 cd backend
 npm run dev
 
-# Terminal 2: Start Frontend
+# Terminal 2: Frontend
 cd frontend
 npm run dev
 ```
@@ -158,7 +178,7 @@ npm run dev
 ### Blockchain Deployment
 
 ```bash
-# Compile contracts
+# Compile
 npm run compile
 
 # Deploy to Celo Sepolia
@@ -169,12 +189,10 @@ npx hardhat run scripts/deploy.js --network celoSepolia
 
 ### CampusMarketplace
 
-A data-only storage contract on Celo blockchain — no payment logic on-chain.
+Data storage on Celo blockchain.
 
 - **Network**: Celo Sepolia
 - **Address**: `0x0f4A570a593F27Fa78Bf09F4F0301Ae41c4ee075`
-
-#### Functions
 
 ```solidity
 // Write Functions
@@ -189,52 +207,29 @@ function getItemsByCategory(Category) -> Item[]
 function getItemsByPriceRange(minPrice, maxPrice) -> Item[]
 function getItemsByCondition(Condition) -> Item[]
 function getSellerItems(seller) -> Item[]
-```
 
-#### Enums
-
-```solidity
 enum Category { Textbooks, LabManuals, Notebooks, Stationery, Calculators, Other }
 enum Condition { New, LikeNew, Good, Fair }
 ```
 
-## API Endpoints
+## Impact Goals
 
-| Method | Endpoint | Description |
-|--------|-----------|-------------|
-| `POST` | `/api/users/register` | Register user |
-| `POST` | `/api/users/login` | User login |
-| `GET` | `/api/listings` | Get all listings |
-| `POST` | `/api/listings` | Create listing |
-| `PUT` | `/api/listings/:id` | Update listing |
-| `DELETE` | `/api/listings/:id` | Delete listing |
-| `POST` | `/api/upload/image` | Upload image |
-
-## Features
-
-### Campus Samagri
-- List textbooks, lab manuals, stationery
-- Browse by category and condition
-- Filter by price range
-- Mark items as sold
-
-### Annapurna
-- Connect surplus mess food to those in need
-- Real-time availability tracking
-
-### AushadhMitra
-- Share unopened medicines before expiry
-- Medicine type and quantity tracking
+| Metric | Target |
+|--------|--------|
+| Food rescued | 1000+ kg/month |
+| Medicines shared | 500+ units/month |
+| Educational materials | 2000+ items |
+| Active users | 10,000+ |
 
 ## License
 
-MIT License — see [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE](LICENSE).
 
 ## Disclaimer
 
-This project is for educational/demonstration purposes. When deploying to production:
-- Add proper authentication and authorization
-- Implement rate limiting
-- Add input validation and sanitization
-- Use environment-appropriate private key management
-- Add comprehensive tests
+This project is for educational/demo purposes. Production deployment requires:
+- Proper authentication/authorization
+- Rate limiting
+- Input validation
+- Secure key management
+- Comprehensive tests
